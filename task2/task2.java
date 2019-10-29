@@ -44,6 +44,14 @@ public class task2 {
             System.out.println(point.x + " " + point.y);
         }
 
+        for (Point point: points) {
+            System.out.println(f(quadrangle.a,quadrangle.b,quadrangle.d,point) && f(quadrangle.b,quadrangle.c,quadrangle.d,point)
+                    && f(quadrangle.b,quadrangle.c,quadrangle.a,point) && f(quadrangle.c,quadrangle.d,quadrangle.a,point)
+                    && f(quadrangle.c,quadrangle.d,quadrangle.b,point) && f(quadrangle.d,quadrangle.a,quadrangle.b,point)
+                    && f(quadrangle.d,quadrangle.a,quadrangle.c,point) && f(quadrangle.a,quadrangle.b,quadrangle.c,point)
+                    ? "yes" : "no");
+        }
+
     }
 
     public static void readFile(String fileName, boolean isQuadrangle){
@@ -69,6 +77,17 @@ public class task2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // Вычисляет положение точки D(xd,yd) относительно прямой AB
+    public static float g(Point a, Point b, Point d){
+        return (d.x - a.x) * (b.y - a.y) - (d.y - a.y) * (b.x - a.x);
+    }
+
+    // Лежат ли точки C и D с одной стороны прямой (AB)?
+    public static boolean f(Point a, Point b, Point c, Point d)
+    {
+        return g(a, b, c) * g(a, b, d) >= 0;
     }
 
 }
