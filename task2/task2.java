@@ -2,12 +2,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class task2 {
 
     static Quadrangle quadrangle;
     static ArrayList<Point> points;
+    static int zeroCounter;
 
     static class Point {
         float x;
@@ -33,25 +33,7 @@ public class task2 {
     public static void main(String[] args) {
         readFile("Quadrangle",true);
         readFile("Points",false);
-        System.out.println(quadrangle.a.x + " " + quadrangle.a.y);
-        System.out.println(quadrangle.b.x + " " + quadrangle.b.y);
-        System.out.println(quadrangle.c.x + " " + quadrangle.c.y);
-        System.out.println(quadrangle.d.x + " " + quadrangle.d.y);
-
-        System.out.println();
-
-        for (Point point:points) {
-            System.out.println(point.x + " " + point.y);
-        }
-
-        for (Point point: points) {
-            System.out.println(f(quadrangle.a,quadrangle.b,quadrangle.d,point) && f(quadrangle.b,quadrangle.c,quadrangle.d,point)
-                    && f(quadrangle.b,quadrangle.c,quadrangle.a,point) && f(quadrangle.c,quadrangle.d,quadrangle.a,point)
-                    && f(quadrangle.c,quadrangle.d,quadrangle.b,point) && f(quadrangle.d,quadrangle.a,quadrangle.b,point)
-                    && f(quadrangle.d,quadrangle.a,quadrangle.c,point) && f(quadrangle.a,quadrangle.b,quadrangle.c,point)
-                    ? "yes" : "no");
-        }
-
+        getPointType();
     }
 
     public static void readFile(String fileName, boolean isQuadrangle){
@@ -85,9 +67,51 @@ public class task2 {
     }
 
     // Лежат ли точки C и D с одной стороны прямой (AB)?
-    public static boolean f(Point a, Point b, Point c, Point d)
+    public static float f(Point a, Point b, Point c, Point d)
     {
-        return g(a, b, c) * g(a, b, d) >= 0;
+        return g(a, b, c) * g(a, b, d);
     }
 
+    public static boolean isPointInside(float value){
+        if (value < 0.0){
+            System.out.println(3);
+            return false;
+        }
+        else if (value == 0.0) zeroCounter++;
+        return true;
+    }
+
+    public static void getPointType(){
+        zeroCounter = 0;
+        for (Point point: points) {
+            if(isPointInside(f(quadrangle.a,quadrangle.b,quadrangle.d,point))){
+                if (isPointInside(f(quadrangle.b,quadrangle.c,quadrangle.d,point))){
+                    if (isPointInside(f(quadrangle.b,quadrangle.c,quadrangle.a,point))){
+                        if (isPointInside(f(quadrangle.c,quadrangle.d,quadrangle.a,point))){
+                            if (isPointInside(f(quadrangle.c,quadrangle.d,quadrangle.b,point))){
+                                if (isPointInside(f(quadrangle.d,quadrangle.a,quadrangle.b,point))){
+                                    if (isPointInside(f(quadrangle.d,quadrangle.a,quadrangle.c,point))){
+                                        if (isPointInside(f(quadrangle.a,quadrangle.b,quadrangle.c,point))){
+                                            if (zeroCounter == 4){
+                                                System.out.println(0);
+                                                zeroCounter = 0;
+                                            }
+                                            else if (zeroCounter == 2){
+                                                System.out.println(1);
+                                                zeroCounter = 0;
+                                            }
+                                            else {
+                                                System.out.println(2);
+                                                zeroCounter = 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
