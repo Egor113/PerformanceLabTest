@@ -1,9 +1,7 @@
 import java.io.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 public class task1 {
 
@@ -20,6 +18,7 @@ public class task1 {
         df.setDecimalFormatSymbols(dfs);
 
         selectionSort();
+        System.out.println(df.format(getPersentil()));
         System.out.println(df.format(findMedian()));
         System.out.println(df.format(list.get(list.size()-1)));
         System.out.println(df.format(list.get(0)));
@@ -36,7 +35,6 @@ public class task1 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void selectionSort()
@@ -77,38 +75,11 @@ public class task1 {
         }
         return sum/list.size();
     }
-//    public static void calcPercentiles(LinkedHashMap hashMap) {
-//        int size = hashMap.size();
-//
-//        List<Integer> value_list = new ArrayList(hashMap.values());
-//
-//        int sum = 0;
-//        for (int i = 0; i < size; i++) {
-//            sum += value_list.get(i);
-//        }
-//
-//        for (int i = 0; i < size; i++) {
-//            System.out.println(100 * value_list.get(i) / (float) sum);
-//        }
-//    }
-//    public static void getPercentil(){
-//        float[] mean = new float[3];
-//
-//        double[][] values = new double[3][list.size()];
-//        int index = 0;
-//
-//        for (int axis : list) {
-//            for (int i = 0; i < axis.length; i++) {
-//                values[i][index] = axis[i];
-//            }
-//            index++;
-//        }
-//
-//        for (int i = 0; i < mean.length; i++) {
-//            mean[i] = (float) StatUtils.percentile(values[i], 50);
-//        }
-//
-//        return mean;
-//    }
 
+    public static double getPersentil() {
+        double n = (0.9 * (list.size() - 1 ) + 1);
+        int intValue = (int) Math.floor(n) - 1;
+        double fraction = n % 1;
+        return list.get(intValue) + fraction*(list.get(intValue + 1) - list.get(intValue));
+    }
 }
