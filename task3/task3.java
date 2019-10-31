@@ -32,7 +32,7 @@ public class task3 {
 
                 if(!item.isDirectory()){
 
-                    readFile(item.getName());
+                    readFile(dirName + "/" + item.getName());
                 }
             }
         }
