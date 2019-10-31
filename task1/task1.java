@@ -19,7 +19,7 @@ public class task1 {
 
         selectionSort();
         System.out.println(df.format(getPersentil()));
-        System.out.println(df.format(findMedian()));
+        System.out.println(df.format(getMedian()));
         System.out.println(df.format(list.get(list.size()-1)));
         System.out.println(df.format(list.get(0)));
         System.out.println(df.format(getAverage()));
@@ -60,7 +60,7 @@ public class task1 {
         }
     }
 
-    public static double findMedian(){
+    public static double getMedian(){
         if (list.size() % 2 == 1){
             return list.get(list.size()/2);
         } else {
