@@ -55,7 +55,7 @@ public class task4 {
     public static void main(String[] args) throws ParseException {
         visitors = new ArrayList<>();
         timePeriods = new ArrayList<>();
-        readFile("Visitors.txt");
+        readFile(args[0]);
         for (TimePeriod period: getMaxBusyTimePeriod()) {
             SimpleDateFormat formatter = new SimpleDateFormat("h:mm");
             String strStartTime = formatter.format(period.startTime);

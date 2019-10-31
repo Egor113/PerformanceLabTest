@@ -31,8 +31,8 @@ public class task2 {
     }
 
     public static void main(String[] args) {
-        readFile("Quadrangle",true);
-        readFile("Points",false);
+        readFile(args[0],true);
+        readFile(args[1],false);
         getPointType();
     }
 

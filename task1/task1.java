@@ -9,7 +9,7 @@ public class task1 {
 
     public static void main(String[] args) throws IOException {
         list = new ArrayList<>();
-        readFile("test.txt");
+        readFile(args[0]);
 
         DecimalFormat df = new DecimalFormat("#####0.00");
         DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
