@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,12 +20,22 @@ public class task3 {
 
     public static void main(String[] args) {
         fileList = new ArrayList<>();
-        readFile("Cash1.txt");
-        readFile("Cash2.txt");
-        readFile("Cash3.txt");
-        readFile("Cash4.txt");
-        readFile("Cash5.txt");
+        getFiles(args[0]);
         System.out.println(getMinQueueTime());
+    }
+
+    public static void getFiles(String dirName){
+        File dir = new File(dirName);
+        if(dir.isDirectory())
+        {
+            for(File item : dir.listFiles()){
+
+                if(!item.isDirectory()){
+
+                    readFile(item.getName());
+                }
+            }
+        }
     }
 
     public static void readFile(String fileName) {
